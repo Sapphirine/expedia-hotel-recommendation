@@ -29,7 +29,7 @@ spark = SparkSession.builder.appName("Split").getOrCreate()
 df = spark.read.csv(inputUri, inferSchema=True)
 
 # Split dataframe into training and test
-training, test = df.randomSplit([0.7, 0.3], 100)
+training, test = df.randomSplit(weights, 100)
 
 # Write the two csvs to file
 training.write.csv(outputTrainUri, mode='overwrite')
